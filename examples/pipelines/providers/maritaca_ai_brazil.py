@@ -7,7 +7,7 @@ import requests
 
 class Pipeline:
     class Valves(BaseModel):
-        OPENAI_API_KEY: str = ""
+        MARITACA_API_KEY: str = ""
         pass
 
     def __init__(self):
@@ -15,12 +15,12 @@ class Pipeline:
         # Best practice is to not specify the id so that it can be automatically inferred from the filename, so that users can install multiple versions of the same pipeline.
         # The identifier must be unique across all pipelines.
         # The identifier must be an alphanumeric string that can include underscores or hyphens. It cannot contain spaces, special characters, slashes, or backslashes.
-        # self.id = "openai_pipeline"
-        self.name = "OpenAI Pipeline"
+        # self.id = "maritaca_pipeline"
+        self.name = "Maritaca Brazillian Pipeline"
         self.valves = self.Valves(
             **{
-                "OPENAI_API_KEY": os.getenv(
-                    "OPENAI_API_KEY", "your-openai-api-key-here"
+                "MARITACA_API_KEY": os.getenv(
+                    "MARITACA_API_KEY", "your-maritaca-api-key-here"
                 )
             }
         )
@@ -45,11 +45,11 @@ class Pipeline:
         print(messages)
         print(user_message)
 
-        OPENAI_API_KEY = self.valves.OPENAI_API_KEY
+        MARITACA_API_KEY = self.valves.MARITACA_API_KEY
         MODEL = "sabia-3"
 
         headers = {}
-        headers["Authorization"] = f"Bearer {OPENAI_API_KEY}"
+        headers["Authorization"] = f"Bearer {MARITACA_API_KEY}"
         headers["Content-Type"] = "application/json"
 
         payload = {**body, "model": MODEL}
